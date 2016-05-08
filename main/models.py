@@ -27,6 +27,7 @@ class Url(models.Model):
 
     def add_analytics(self):
         self.analytics = Analytics.create_analytics()
+        self.analytics.save()
 
     @classmethod
     def create_url(cls, original_url):
@@ -35,8 +36,8 @@ class Url(models.Model):
         url = cls(original_url=original_url, count=current_count)
         url.set_hash(original_url)
         url.set_short_url()
-        url.add_analytics()
         url.save()
+        url.add_analytics()
 
         return url
 
